@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pip:*)",
+      "Bash(python:*)",
+      "Bash(C:/Users/zzx/AppData/Local/Programs/Python/Python39/python:*)",
+      "Bash(ls:*)",
+      "Bash(claude:*)",
+      "Bash(rm:*)",
+      "Bash(where claude:*)",
+      "Bash(CLAUDECODE= claude:*)",
+      "WebSearch",
+      "Bash(python3:*)"
+    ]
+  }
+}

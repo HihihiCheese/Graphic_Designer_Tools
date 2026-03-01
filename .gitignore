@@ -1,0 +1,22 @@
+# 输出目录
+output/
+
+# Python
+*.pyc
+__pycache__/
+*.egg-info/
+dist/
+build/
+
+# 环境与密钥
+.env
+config.json
+venv/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+Thumbs.db
+.DS_Store

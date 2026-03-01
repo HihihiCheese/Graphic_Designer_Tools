@@ -1,0 +1,36 @@
+{# 紫色模板 — 正式通知/会议风格 #}
+{# 变量: sections, credits, title, head_img_html, tail_img_html #}
+<section style="box-sizing: border-box; font-style: normal; font-weight: 400; text-align: justify; font-size: 16px; color: rgb(62, 62, 62); font-family: 微软雅黑, sans-serif;">
+
+{# 头图（如果提供） #}
+{{ head_img_html }}
+
+{# 遍历内容区域 #}
+{% for section in sections %}
+
+{% if section.type == 'heading' %}
+{# 渐变标题栏 + 装饰方块 #}
+{{ purple_heading(section.content) }}
+
+{% elif section.type == 'paragraph' %}
+{# 浅紫背景正文块 #}
+{{ purple_text_block(section.content_html) }}
+
+{% elif section.type == 'image' %}
+{# 全宽图片 #}
+{{ purple_image(section.src) }}
+<p style="white-space: normal; margin: 0px; padding: 0px; box-sizing: border-box;"><br style="box-sizing: border-box;"></p>
+
+{% endif %}
+{% endfor %}
+
+{# 紫色分隔线 #}
+{{ purple_separator() }}
+
+{# 署名 #}
+{{ purple_credits(credits) }}
+
+{# 尾图（如果提供） #}
+{{ tail_img_html }}
+
+</section>

@@ -1,0 +1,41 @@
+{# 红色模板2 — 党建简约风格（红色边框 + 角落装饰） #}
+{# 变量: sections, credits, head_img_html, tail_img_html #}
+<section style="box-sizing: border-box; font-style: normal; font-weight: 400; text-align: justify; font-size: 16px; color: rgb(62, 62, 62); font-family: 微软雅黑, sans-serif;">
+
+{# 头图（如果提供） #}
+{{ head_img_html }}
+
+{# 红色边框外框开始 #}
+{{ red2_frame_open() }}
+
+{# 遍历内容区域 #}
+{% for section in sections %}
+
+{% if section.type == 'paragraph' %}
+{{ red2_paragraph(section.content_html) }}
+
+{% elif section.type == 'image' %}
+{{ red2_image(section.src) }}
+
+{% elif section.type == 'heading' %}
+{# 标题作为加粗居中文字 #}
+<section style="text-align: center; margin: 10px 0px; box-sizing: border-box;">
+<p style="white-space: normal; margin: 0px; padding: 0px; box-sizing: border-box;"><strong style="color: rgb(216, 23, 23); box-sizing: border-box;">{{ section.content }}</strong></p>
+</section>
+
+{% endif %}
+{% endfor %}
+
+{# 红色边框外框结束 #}
+{{ red2_frame_close() }}
+
+{# 菱形点分隔符 #}
+{{ red2_diamond_separator() }}
+
+{# 署名 #}
+{{ red2_credits(credits) }}
+
+{# 尾图（如果提供） #}
+{{ tail_img_html }}
+
+</section>

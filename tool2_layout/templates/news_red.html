@@ -1,0 +1,66 @@
+{# 红色模板 — 党建风格 #}
+{# 变量: sections, credits, head_img_html, tail_img_html #}
+{# sections 中的 type: paragraph, image, heading, activity_title #}
+<section style="box-sizing: border-box; font-style: normal; font-weight: 400; text-align: justify; font-size: 16px; color: rgb(62, 62, 62); font-family: 微软雅黑, sans-serif;">
+
+{# 头图（如果提供） #}
+{{ head_img_html }}
+
+{# 红色双线分隔 #}
+{{ red_separator() }}
+
+{# 遍历内容区域 #}
+{% set ns = namespace(img_counter=0) %}
+{% for section in sections %}
+
+{% if section.type == 'intro' or (section.type == 'paragraph' and loop.first) %}
+{# 导语/结语：红框折角卡片 #}
+{{ red_text_card(section.content_html) }}
+
+{% elif section.type == 'conclusion' or (section.type == 'paragraph' and loop.last) %}
+{# 结语卡片 #}
+{{ red_dashed_line() }}
+{{ red_text_card(section.content_html) }}
+
+{% elif section.type == 'activity_title' %}
+{# 活动大标题横幅 #}
+{{ red_activity_banner(section.content) }}
+
+{% elif section.type == 'heading' %}
+{# 编号小标题 #}
+{{ red_numbered_heading(section.number | default(loop.index), section.content) }}
+
+{% elif section.type == 'paragraph' %}
+{# 正文段落：红色边框文字块 #}
+{{ red_text_block(section.content_html) }}
+
+{% elif section.type == 'image' %}
+{% if section.in_group %}
+{# 连续3+张图片：样式轮换 #}
+{% set variant = ns.img_counter % 3 %}
+{% if variant == 0 %}
+{{ red_image_with_ribbon(section.src) }}
+{% elif variant == 1 %}
+{{ red_image_with_bar(section.src) }}
+{% else %}
+{{ red_image(section.src) }}
+{% endif %}
+{% set ns.img_counter = ns.img_counter + 1 %}
+{% else %}
+{# 单独图片：居中显示 #}
+{{ red_image(section.src) }}
+{% endif %}
+
+{% endif %}
+{% endfor %}
+
+{# 底部红色虚线分隔 #}
+{{ red_dashed_line() }}
+
+{# 署名 #}
+{{ red_credits(credits) }}
+
+{# 尾图（如果提供） #}
+{{ tail_img_html }}
+
+</section>

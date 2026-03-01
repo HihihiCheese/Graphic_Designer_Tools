@@ -1,0 +1,42 @@
+{# 青色模板 — 学术论坛/活动风格 #}
+{# 变量: sections, credits, head_img_html, tail_img_html #}
+{# sections 中的 type: paragraph, image, heading #}
+<section style="box-sizing: border-box; font-style: normal; font-weight: 400; text-align: justify; font-size: 16px; color: rgb(62, 62, 62); font-family: 微软雅黑, sans-serif;">
+
+{# 头图（如果提供） #}
+{{ head_img_html }}
+
+{# 遍历内容区域 #}
+{% for section in sections %}
+
+{% if section.type == 'paragraph' and loop.first %}
+{# 导语：渐变竖条边框卡片 #}
+{{ cyan_text_card(section.content_html) }}
+
+{% elif section.type == 'paragraph' and loop.last %}
+{# 结语：渐变竖条边框卡片 #}
+{{ cyan_text_card(section.content_html) }}
+
+{% elif section.type == 'heading' %}
+{# 编号标题：橙色徽章 + 渐变药丸 #}
+{{ cyan_numbered_heading(section.number | default(loop.index), section.content) }}
+
+{% elif section.type == 'paragraph' %}
+{# 正文段落：浅青色背景块 #}
+{{ cyan_text_block(section.content_html) }}
+
+{% elif section.type == 'image' %}
+{# 图片：全宽无边框 #}
+{{ cyan_image(section.src) }}
+<p style="white-space: normal; margin: 0px; padding: 0px; box-sizing: border-box;"><br style="box-sizing: border-box;"></p>
+
+{% endif %}
+{% endfor %}
+
+{# 署名 #}
+{{ cyan_credits(credits) }}
+
+{# 尾图（如果提供） #}
+{{ tail_img_html }}
+
+</section>

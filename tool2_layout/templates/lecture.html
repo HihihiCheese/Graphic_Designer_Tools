@@ -1,0 +1,38 @@
+{# 讲座模板 — 可重复N篇讲座 #}
+{# 变量: lectures (列表), credits, head_img_html, tail_img_html #}
+<section style="box-sizing: border-box; font-style: normal; font-weight: 400; text-align: justify; font-size: 16px; color: rgb(62, 62, 62); font-family: 微软雅黑, sans-serif;">
+
+{# 头图（如果提供） #}
+{{ head_img_html }}
+
+{% for lecture in lectures %}
+{# 讲座海报 #}
+{% if lecture.poster %}
+{{ lecture_poster(lecture.poster) }}
+{% endif %}
+
+{# 装饰线 #}
+{{ decorator_line() }}
+
+{# 信息区 #}
+{{ lecture_info(lecture.speaker, lecture.host, lecture.time, lecture.location) }}
+
+{# 装饰线 #}
+{{ decorator_line() }}
+
+{# 内容卡片 #}
+{{ lecture_card(lecture.title, lecture.photo, lecture.abstract, lecture.bio) }}
+
+{# 段间分隔 GIF #}
+{% if not loop.last %}
+{{ decorator_gif() }}
+{% endif %}
+{% endfor %}
+
+{# 署名 #}
+{{ credits_block(credits) }}
+
+{# 尾图（如果提供） #}
+{{ tail_img_html }}
+
+</section>

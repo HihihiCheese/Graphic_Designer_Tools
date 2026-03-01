@@ -1,0 +1,31 @@
+{# 蓝色模板2 — 简洁短稿风格，深蓝边框 + 浅蓝底 + 折角装饰 #}
+{# 变量: sections, credits, head_img_html, tail_img_html #}
+<section style="box-sizing: border-box; font-style: normal; font-weight: 400; text-align: justify; font-size: 16px; color: rgb(62, 62, 62); font-family: 微软雅黑, sans-serif;">
+
+{# 头图（如果提供） #}
+{{ head_img_html }}
+
+{# 外框开始 #}
+{{ blue2_frame_open() }}
+
+{# 内容区：图片和正文交替 #}
+{% for section in sections %}
+{% if section.type == 'image' %}
+{{ blue2_image(section.src) }}
+{% elif section.type == 'paragraph' %}
+{{ blue2_paragraph(section.content_html) }}
+{% elif section.type == 'heading' %}
+{{ heading_block(section.content) }}
+{% endif %}
+{% endfor %}
+
+{# 外框结束 #}
+{{ blue2_frame_close() }}
+
+{# 署名 #}
+{{ credits_block(credits) }}
+
+{# 尾图（如果提供） #}
+{{ tail_img_html }}
+
+</section>

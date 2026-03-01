@@ -1,0 +1,28 @@
+{# 新闻稿模板 — 蓝色风格，含头图尾图 #}
+{# 变量: head_img, tail_img, sections, credits, title #}
+<section style="box-sizing: border-box; font-style: normal; font-weight: 400; text-align: justify; font-size: 16px; color: rgb(62, 62, 62); font-family: 微软雅黑, sans-serif;">
+
+{# 头图 #}
+{{ head_img_html }}
+
+{# 正文区域：文字卡片和图片交替 #}
+{% for section in sections %}
+{% if section.type == 'paragraph' %}
+{{ text_card(section.content_html) }}
+{% elif section.type == 'image' %}
+{{ image_frame(section.src) }}
+{% elif section.type == 'heading' %}
+{{ heading_block(section.content) }}
+{% endif %}
+{% endfor %}
+
+{# 底部装饰分隔 #}
+{{ news_separator() }}
+
+{# 署名 #}
+{{ credits_block(credits) }}
+
+{# 尾图 #}
+{{ tail_img_html }}
+
+</section>
