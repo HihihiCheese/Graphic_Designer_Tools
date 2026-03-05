@@ -33,7 +33,7 @@ def main():
     parser.add_argument("--head-img", default=None, help="自定义头图路径")
     parser.add_argument("--tail-img", default=None, help="自定义尾图路径")
     parser.add_argument("--template", default=None,
-                        choices=["news", "news_blue2", "news_red", "news_red2", "news_cyan", "news_purple", "lecture"],
+                        choices=["news", "news_blue2", "news_red", "news_red2", "news_red3", "news_cyan", "news_purple", "lecture"],
                         help="指定模板（默认根据 category 自动选择）")
     parser.add_argument("--no-preview", action="store_true", help="不自动打开浏览器预览")
     args = parser.parse_args()

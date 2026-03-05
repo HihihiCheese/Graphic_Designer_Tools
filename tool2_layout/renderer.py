@@ -27,6 +27,7 @@ TEMPLATE_EMPHASIS_COLOR = {
     "news_red": EMPHASIS_COLOR_RED,
     "news_cyan": EMPHASIS_COLOR_BLUE,
     "news_red2": EMPHASIS_COLOR_RED,
+    "news_red3": EMPHASIS_COLOR_RED,
     "news_purple": EMPHASIS_COLOR_BLUE,
     "lecture": EMPHASIS_COLOR_BLUE,
 }
@@ -115,6 +116,11 @@ def _prepare_news_sections(sections, images_dir, emphasis_color=None):
                 "type": "image",
                 "src": src,
                 "in_group": False,  # 后续标记是否属于连续图片组
+            })
+        elif sec["type"] == "caption":
+            prepared.append({
+                "type": "caption",
+                "content": sec["content"],
             })
         elif sec["type"] == "heading":
             heading_counter += 1
@@ -353,6 +359,19 @@ def render(extracted_json_path, head_img=None, tail_img=None, template_name=None
         "red2_image": components.red2_image,
         "red2_diamond_separator": components.red2_diamond_separator,
         "red2_credits": components.red2_credits,
+        # 红色模板3
+        "red3_top_decoration": components.red3_top_decoration,
+        "red3_card_with_corner_open": components.red3_card_with_corner_open,
+        "red3_card_with_corner_close": components.red3_card_with_corner_close,
+        "red3_separator_bar": components.red3_separator_bar,
+        "red3_content_card_open": components.red3_content_card_open,
+        "red3_content_card_close": components.red3_content_card_close,
+        "red3_paragraph": components.red3_paragraph,
+        "red3_paragraph_spacing": components.red3_paragraph_spacing,
+        "red3_image": components.red3_image,
+        "red3_halfcircle_row": components.red3_halfcircle_row,
+        "red3_end_marker": components.red3_end_marker,
+        "red3_credits": components.red3_credits,
         # 紫色模板
         "purple_heading": components.purple_heading,
         "purple_text_block": components.purple_text_block,

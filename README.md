@@ -26,11 +26,13 @@
 - 处理：匹配文章类型对应的HTML模板，填充内容，应用美编规范样式
 - 输出：符合规范的富文本 HTML 文件
 
-### 工具3：公众号草稿推送 (`tool3_publish`)
+### 工具3：公众号推送助手 (`tool3_publish`)
 
 - 输入：工具2输出的 HTML + 图片素材
-- 处理：通过微信公众号API上传素材、创建草稿
-- 输出：公众号后台草稿（等待人工审核后发布）
+- 处理：交互确认署名→上传图片到图床（支持 ImgBB / SM.MS）→生成推送助手页面
+- 输出：带一键复制按钮的推送助手页面（标题/摘要/正文分区）
+- 特性：本地图片 + 外部 CDN 素材（头尾图、装饰 GIF）全部上传图床，确保复制粘贴后图片正常显示
+- 使用方式：浏览器打开 → 逐项复制 → 粘贴到公众号后台
 
 ## 美编规范摘要
 
@@ -63,7 +65,7 @@
 |-------|------|------|
 | Phase 1 | tool1_extract — 内容提取 | ✅ 已完成 |
 | Phase 2 | tool2_layout — 排版生成 | ✅ 已完成 |
-| Phase 3 | tool3_publish — 公众号推送 | 🔲 待开发 |
+| Phase 3 | tool3_publish — 公众号推送 | ✅ 已完成 |
 | Phase 4 | pipeline — 全流程串联 | 🔲 待开发 |
 
 ## 使用方式
@@ -78,10 +80,12 @@ python -m tool1_extract.main "稿件.docx" --no-llm
 # 工具2：生成排版（自动根据 category 选模板，浏览器预览）
 python -m tool2_layout.main output/稿件名/extracted.json
 python -m tool2_layout.main output/稿件名/extracted.json --template news_purple
-# 可选模板: news, news_blue2, news_red, news_red2, news_cyan, news_purple, lecture
+# 可选模板: news, news_blue2, news_red, news_red2, news_red3, news_cyan, news_purple, lecture
 
-# 工具3：推送草稿（待开发）
-# python -m tool3_publish.main output/稿件名/layout.html
+# 工具3：推送助手（交互确认署名 + 图片上传 + 生成复制页面）
+python -m tool3_publish.main output/稿件名/
+python -m tool3_publish.main output/稿件名/ --dry-run   # 模拟运行
+python -m tool3_publish.main --setup                     # 查看配置指南
 
 # 一键全流程（待开发）
 # python pipeline.py input.docx
@@ -106,10 +110,17 @@ Hicheese_tool/
 │       ├── news_blue2.html    # 蓝色模板2（短稿）
 │       ├── news_red.html      # 红色模板1（党建复杂版）
 │       ├── news_red2.html     # 红色模板2（党建简约版）
+│       ├── news_red3.html     # 红色模板3（简洁党建/活动短稿）
 │       ├── news_cyan.html     # 青色模板（学术论坛）
 │       ├── news_purple.html   # 紫色模板（正式通知）
 │       └── lecture.html       # 讲座模板
-├── tool3_publish/             # 工具3：公众号推送（待开发）
+├── tool3_publish/             # 工具3：推送助手
+│   ├── main.py                # CLI 入口 + 交互确认 + 生成推送助手页面
+│   ├── config.py              # 配置管理（图床token + 公众号API备用）
+│   ├── image_hosting.py       # 图床上传（ImgBB / SM.MS）
+│   ├── html_processor.py      # HTML 处理（本地+CDN图片上传替换 + 署名更新）
+│   └── wechat_api.py          # 微信API客户端（备用，需管理员权限）
+├── config.example.json        # 配置模板（复制为 config.json 使用）
 ├── output/                    # 输出目录
 │   ├── clipboard_news.html    # 秀米新闻稿模板源码（参考）
 │   ├── clipboard_raw.html     # 秀米讲座模板源码（参考）

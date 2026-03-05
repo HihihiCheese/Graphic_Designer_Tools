@@ -1,0 +1,77 @@
+{# 红色模板3 — 简洁党建/活动风格（红色边框 + 虚线装饰 + 角落方块 + 十字点） #}
+{# 变量: sections, credits, head_img_html, tail_img_html #}
+<section style="box-sizing: border-box; font-style: normal; font-weight: 400; text-align: justify; font-size: 16px; color: rgb(62, 62, 62); font-family: 微软雅黑, sans-serif;">
+
+{# 头图（如果提供） #}
+{{ head_img_html }}
+
+{# 顶部装饰：红色实线 + 红色虚线 #}
+{{ red3_top_decoration() }}
+
+{# 首段：带角落装饰的卡片（取第一个 paragraph 类型的 section） #}
+{% set ns = namespace(first_para_done=false) %}
+{% for section in sections %}
+{% if section.type == 'paragraph' and not ns.first_para_done %}
+{{ red3_card_with_corner_open() }}
+{{ section.content_html }}
+{{ red3_card_with_corner_close() }}
+{% set ns.first_para_done = true %}
+{% endif %}
+{% endfor %}
+
+{# 红色分隔条 #}
+{{ red3_separator_bar() }}
+
+{# 主内容卡片（跳过首段，渲染剩余所有内容） #}
+{{ red3_content_card_open() }}
+
+{% set ns2 = namespace(skip_first_para=true, need_spacing=false) %}
+{% for section in sections %}
+
+{% if section.type == 'paragraph' and ns2.skip_first_para %}
+{# 跳过首段（已在上面带角落装饰的卡片中渲染） #}
+{% set ns2.skip_first_para = false %}
+
+{% elif section.type == 'paragraph' %}
+{% if ns2.need_spacing %}
+{{ red3_paragraph_spacing() }}
+{% endif %}
+{{ red3_paragraph(section.content_html) }}
+{% set ns2.need_spacing = true %}
+
+{% elif section.type == 'image' %}
+{% if ns2.need_spacing %}
+{{ red3_paragraph_spacing() }}
+{% endif %}
+{{ red3_image(section.src) }}
+{% set ns2.need_spacing = true %}
+
+{% elif section.type == 'heading' %}
+{# 标题作为加粗居中红色文字 #}
+{% if ns2.need_spacing %}
+{{ red3_paragraph_spacing() }}
+{% endif %}
+<section style="text-align: center; margin: 10px 0px; box-sizing: border-box;">
+<p style="white-space: normal; margin: 0px; padding: 0px; box-sizing: border-box;"><strong style="color: rgb(239, 54, 46); box-sizing: border-box;">{{ section.content }}</strong></p>
+</section>
+{% set ns2.need_spacing = true %}
+
+{% endif %}
+{% endfor %}
+
+{{ red3_paragraph_spacing() }}
+{{ red3_content_card_close() }}
+
+{# 底部半圆拱形装饰 #}
+{{ red3_halfcircle_row() }}
+
+{# END 标记 #}
+{{ red3_end_marker() }}
+
+{# 署名 #}
+{{ red3_credits(credits) }}
+
+{# 尾图（如果提供） #}
+{{ tail_img_html }}
+
+</section>

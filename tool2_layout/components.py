@@ -773,3 +773,183 @@ def purple_credits(credits_dict):
     return f'''<section style="text-align: center; font-size: 12px; box-sizing: border-box;">
 {content}
 </section>'''
+
+
+# ============================================================
+# 红色模板3 组件（简洁党建/活动风格）
+# 主色: rgb(239, 54, 46)  END文字色: rgb(185, 27, 21)
+# 特点: 实线+虚线顶部装饰、红框卡片（首段带角落装饰）、红色分隔条、半圆拱形底部装饰
+# ============================================================
+
+RED3_COLOR = "rgb(239, 54, 46)"
+RED3_END_COLOR = "rgb(185, 27, 21)"
+
+# SVG 占位（秀米用于撑开空 section 的通用写法）
+_SVG_SPACER = '<svg viewBox="0 0 1 1" style="float:left;line-height:0;width:0;vertical-align:top;"></svg>'
+
+
+def red3_top_decoration():
+    """红色模板3 顶部装饰 — 红色实线(1px) + 红色虚线(5px dashed)"""
+    return f'''<section style="margin: 10px 0px 0px; position: static; box-sizing: border-box;">
+<section style="background-color: {RED3_COLOR}; height: 1px; box-sizing: border-box;">
+{_SVG_SPACER}</section></section>
+<section style="margin: 0px; position: static; box-sizing: border-box;">
+<section style="border-top: 5px dashed {RED3_COLOR}; box-sizing: border-box;">
+{_SVG_SPACER}</section></section>'''
+
+
+def red3_card_with_corner_open():
+    """红色模板3 带角落装饰的卡片 — 开标签
+
+    首段专用：红色边框 + 右下角45度旋转方块装饰
+    """
+    return f'''<section style="text-align: left; justify-content: flex-start; display: flex; flex-flow: row; margin: 0px 0px 10px; position: static; box-sizing: border-box;">
+<section style="display: inline-block; vertical-align: bottom; width: auto; align-self: flex-end; flex: 100 100 0%; border-style: solid; border-width: 1px; border-color: {RED3_COLOR}; height: auto; padding: 20px; box-sizing: border-box;">
+<section style="margin: 0px; position: static; box-sizing: border-box;">
+<section style="text-align: justify; padding: 0px; line-height: 1.5; box-sizing: border-box;">'''
+
+
+def red3_card_with_corner_close():
+    """红色模板3 带角落装饰的卡片 — 闭标签（含旋转方块装饰）"""
+    return f'''</section></section></section>
+<section style="display: inline-block; vertical-align: bottom; width: auto; align-self: flex-end; flex: 0 0 0%; height: auto; background-color: rgb(255, 255, 255); margin: 0px -8px 0px -17px; box-sizing: border-box;">
+<section style="position: static; transform: rotateZ(45deg); -webkit-transform: rotateZ(45deg); -moz-transform: rotateZ(45deg); -o-transform: rotateZ(45deg); box-sizing: border-box;">
+<section style="text-align: center; margin: 1px 0px -9px; transform: translate3d(5px, 0px, 0px); -webkit-transform: translate3d(5px, 0px, 0px); -moz-transform: translate3d(5px, 0px, 0px); -o-transform: translate3d(5px, 0px, 0px); position: static; box-sizing: border-box;">
+<section class="group-empty" style="display: inline-block; width: 25px; height: 25px; vertical-align: top; overflow: hidden; border-left: 1px solid {RED3_COLOR}; background-color: rgba(255, 255, 255, 0); box-sizing: border-box;">
+{_SVG_SPACER}</section></section></section></section></section>'''
+
+
+def _red3_cross_dot(bg_color, fg_color):
+    """生成一组十字装饰点（3个小形状组成的十字图案）
+
+    Args:
+        bg_color: 点的背景色
+        fg_color: 未使用（保留接口一致性）
+    """
+    return f'''<section style="display: inline-block; vertical-align: middle; width: auto; align-self: center; flex: 0 0 auto; min-width: 5%; max-width: 100%; height: auto; box-sizing: border-box;">
+<section style="position: static; box-sizing: border-box;">
+<section class="group-empty" style="display: inline-block; width: 3px; height: 6px; vertical-align: top; overflow: hidden; background-color: {bg_color}; border-top-left-radius: 100px; border-bottom-left-radius: 100px; box-sizing: border-box;">
+{_SVG_SPACER}</section></section></section>
+<section style="display: inline-block; vertical-align: middle; width: auto; align-self: center; flex: 0 0 auto; min-width: 5%; max-width: 100%; height: auto; box-sizing: border-box;">
+<section style="position: static; box-sizing: border-box;">
+<section class="group-empty" style="display: inline-block; width: 6px; height: 3px; vertical-align: top; overflow: hidden; border-top-left-radius: 100px; border-top-right-radius: 100px; background-color: {bg_color}; box-sizing: border-box;">
+{_SVG_SPACER}</section></section>
+<section style="position: static; box-sizing: border-box;">
+<section class="group-empty" style="display: inline-block; width: 6px; height: 6px; vertical-align: top; overflow: hidden; background-color: {bg_color}; box-sizing: border-box;">
+{_SVG_SPACER}</section></section>
+<section style="position: static; box-sizing: border-box;">
+<section class="group-empty" style="display: inline-block; width: 6px; height: 3px; vertical-align: top; overflow: hidden; background-color: {bg_color}; border-bottom-left-radius: 100px; border-bottom-right-radius: 100px; box-sizing: border-box;">
+{_SVG_SPACER}</section></section></section>
+<section style="display: inline-block; vertical-align: middle; width: auto; align-self: center; flex: 0 0 auto; min-width: 5%; max-width: 100%; height: auto; box-sizing: border-box;">
+<section style="position: static; box-sizing: border-box;">
+<section class="group-empty" style="display: inline-block; width: 3px; height: 6px; vertical-align: top; overflow: hidden; background-color: {bg_color}; border-top-right-radius: 100px; border-bottom-right-radius: 100px; box-sizing: border-box;">
+{_SVG_SPACER}</section></section></section>'''
+
+
+def red3_separator_bar():
+    """红色模板3 红色分隔条 — 红底 + 3组白色十字装饰"""
+    dot_white = _red3_cross_dot("rgb(255, 255, 255)", "")
+    return f'''<section style="text-align: left; justify-content: flex-start; display: flex; flex-flow: row; margin: 10px 0px 0px; position: static; box-sizing: border-box;">
+<section style="display: inline-block; width: 100%; vertical-align: top; align-self: flex-start; flex: 0 0 auto; background-color: {RED3_COLOR}; padding: 0px 5px; box-sizing: border-box;">
+<section style="justify-content: flex-start; display: flex; flex-flow: row; margin: 5px 0px; position: static; box-sizing: border-box;">
+<section style="display: inline-block; vertical-align: middle; width: auto; align-self: center; flex: 0 0 0%; height: auto; line-height: 0; padding: 0px 0px 0px 5px; box-sizing: border-box;">
+<section style="text-align: center; justify-content: center; display: flex; flex-flow: row; margin: 0px; position: static; box-sizing: border-box;">
+{dot_white}</section></section>
+<section style="display: inline-block; vertical-align: middle; width: auto; align-self: center; flex: 0 0 0%; height: auto; padding: 0px 5px; line-height: 0; box-sizing: border-box;">
+<section style="text-align: center; justify-content: center; display: flex; flex-flow: row; margin: 0px; position: static; box-sizing: border-box;">
+{dot_white}</section></section>
+<section style="display: inline-block; vertical-align: middle; width: auto; align-self: center; flex: 0 0 0%; height: auto; line-height: 0; padding: 0px 5px 0px 0px; box-sizing: border-box;">
+<section style="text-align: center; justify-content: center; display: flex; flex-flow: row; margin: 0px; position: static; box-sizing: border-box;">
+{dot_white}</section></section>
+</section></section></section>'''
+
+
+def red3_content_card_open():
+    """红色模板3 内容卡片 — 开标签（红色边框，无角落装饰）"""
+    return f'''<section style="text-align: left; justify-content: flex-start; display: flex; flex-flow: row; position: static; box-sizing: border-box;">
+<section style="display: inline-block; width: 100%; vertical-align: top; align-self: flex-start; flex: 0 0 auto; border-style: solid; border-width: 1px; border-color: {RED3_COLOR}; padding: 20px 20px 30px; box-sizing: border-box;">'''
+
+
+def red3_content_card_close():
+    """红色模板3 内容卡片 — 闭标签"""
+    return '''</section></section>'''
+
+
+def red3_paragraph(content_html):
+    """红色模板3 段落 — 两端对齐 1.5倍行距
+
+    Args:
+        content_html: 已格式化的段落 HTML（含 <p> 标签）
+    """
+    return f'''<section style="margin: 0px; position: static; box-sizing: border-box;">
+<section style="text-align: justify; padding: 0px; line-height: 1.5; box-sizing: border-box;">
+{content_html}
+</section></section>'''
+
+
+def red3_paragraph_spacing():
+    """红色模板3 段落间空行"""
+    return '''<p style="white-space: normal; margin: 0px; padding: 0px; box-sizing: border-box;"><br style="box-sizing: border-box;"></p>'''
+
+
+def red3_image(src):
+    """红色模板3 图片 — 全宽无边框
+
+    Args:
+        src: 图片 URL
+    """
+    return f'''<section style="line-height: 0; position: static; box-sizing: border-box;">
+<section style="max-width: 100%; vertical-align: middle; display: inline-block; line-height: 0; box-sizing: border-box;">
+<img class="raw-image" src="{src}" style="vertical-align: middle; max-width: 100%; width: 100%; box-sizing: border-box;">
+</section></section>'''
+
+
+def red3_halfcircle_row():
+    """红色模板3 底部半圆拱形装饰行 — 10个红色边框半圆"""
+    halfcircle = f'''<section style="display: inline-block; vertical-align: top; width: auto; align-self: flex-start; flex: 100 100 0%; line-height: 0; height: auto; box-sizing: border-box;">
+<section style="text-align: center; position: static; box-sizing: border-box;">
+<section class="group-empty" style="display: inline-block; width: 20px; height: 10px; vertical-align: top; overflow: hidden; background-color: rgb(255, 255, 255); border-top: 1px solid {RED3_COLOR}; border-left: 1px solid {RED3_COLOR}; border-right: 1px solid {RED3_COLOR}; border-top-left-radius: 100px; border-top-right-radius: 100px; box-sizing: border-box;">
+{_SVG_SPACER}</section></section></section>'''
+    circles = halfcircle * 10
+    return f'''<section style="text-align: left; justify-content: flex-start; display: flex; flex-flow: row; margin: -10px 0px 10px; position: static; box-sizing: border-box;">
+{circles}</section>'''
+
+
+def red3_end_marker():
+    """红色模板3 END 标记 — 红色十字装饰 + 暗红 END 文字 + 红色十字装饰"""
+    dot_red = _red3_cross_dot(RED3_COLOR, "")
+    return f'''<section style="text-align: center; justify-content: center; display: flex; flex-flow: row; margin: 10px 0px; position: static; box-sizing: border-box;">
+<section style="display: inline-block; vertical-align: middle; width: auto; align-self: center; flex: 0 0 0%; height: auto; line-height: 0; padding: 0px 0px 0px 5px; box-sizing: border-box;">
+<section style="justify-content: center; display: flex; flex-flow: row; margin: 0px; position: static; box-sizing: border-box;">
+{dot_red}</section></section>
+<section style="display: inline-block; vertical-align: middle; width: auto; align-self: center; flex: 0 0 auto; min-width: 5%; max-width: 100%; height: auto; padding: 0px 15px; box-sizing: border-box;">
+<section style="text-align: justify; color: {RED3_END_COLOR}; box-sizing: border-box;">
+<p style="white-space: normal; margin: 0px; padding: 0px; box-sizing: border-box;">END</p>
+</section></section>
+<section style="display: inline-block; vertical-align: middle; width: auto; align-self: center; flex: 0 0 0%; height: auto; line-height: 0; padding: 0px 5px 0px 0px; box-sizing: border-box;">
+<section style="justify-content: center; display: flex; flex-flow: row; margin: 0px; position: static; box-sizing: border-box;">
+{dot_red}</section></section></section>'''
+
+
+def red3_credits(credits_dict):
+    """红色模板3 署名区域 — 12px 居中
+
+    Args:
+        credits_dict: {"美编": ["xxx"], "责编": ["xxx"]}
+    """
+    if not credits_dict:
+        return ""
+    lines = []
+    for role, names in credits_dict.items():
+        if isinstance(names, list):
+            names_str = " ".join(names)
+        else:
+            names_str = names
+        lines.append(
+            f'<p style="text-align: center; white-space: normal; padding: 0px; margin: 0px; box-sizing: border-box;">'
+            f'<span style="font-size: 12px; box-sizing: border-box;">{role} | {names_str}</span></p>'
+        )
+    content = "\n".join(lines)
+    return f'''<section style="box-sizing: border-box;">
+{content}
+</section>'''

@@ -11,6 +11,10 @@
 {{ text_card(section.content_html) }}
 {% elif section.type == 'image' %}
 {{ image_frame(section.src) }}
+{% elif section.type == 'caption' %}
+<section style="text-align: center; font-size: 12px; color: rgb(136, 136, 136); margin: 0px; padding: 0px; box-sizing: border-box;">
+<p style="margin: 0px; padding: 0px; box-sizing: border-box;">{{ section.content }}</p>
+</section>
 {% elif section.type == 'heading' %}
 {{ heading_block(section.content) }}
 {% endif %}
